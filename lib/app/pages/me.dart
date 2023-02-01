@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:trek_bkk_app/app/widgets/me_menu.dart';
 
 class Me extends StatelessWidget {
   const Me({super.key});
@@ -18,8 +19,7 @@ class Me extends StatelessWidget {
         child: Column(children: <Widget>[
           Align(alignment: Alignment(1, 0), child: buildSettings()),
           Flexible(flex: 2, fit: FlexFit.tight, child: buildProfile()),
-          Flexible(flex: 1, fit: FlexFit.tight, child: buildMenu()),
-          Flexible(flex: 6, fit: FlexFit.tight, child: buildDetails())
+          Flexible(flex: 7, fit: FlexFit.tight, child: MeMenu()),
         ]),
       )),
     );
@@ -34,44 +34,37 @@ Widget buildProfile() => Container(
       padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
       child: Row(
         children: [
-          CircleAvatar(
+          const CircleAvatar(
               radius: 60,
               backgroundImage:
                   NetworkImage('https://picsum.photos/250?image=9')),
           Container(
-            padding: EdgeInsets.only(left: 30),
+            padding: const EdgeInsets.only(left: 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('userName temp'),
+                const Text('userName temp'),
                 const SizedBox(height: 20),
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: const [
-                      BoxShadow(color: Colors.black, spreadRadius: 1),
-                    ],
-                  ),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(width: 1, color: Colors.black)),
                   child: LinearPercentIndicator(
                     width: 120.0,
                     lineHeight: 15.0,
                     percent: 0.2,
-                    padding: EdgeInsets.symmetric(horizontal: 0),
+                    padding: const EdgeInsets.symmetric(horizontal: 0),
                     barRadius: const Radius.circular(16),
                     progressColor: Colors.blue[400],
                     backgroundColor: Colors.grey[300],
                   ),
                 ),
                 const SizedBox(height: 5),
-                Text('3 places visited'),
+                const Text('3 places visited'),
               ],
             ),
           )
         ],
       ),
     );
-
-Widget buildMenu() => Text('Menu');
-
-Widget buildDetails() => Text('details');
