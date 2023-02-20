@@ -8,14 +8,18 @@ import 'package:trek_bkk_app/app/pages/login/login_view.dart';
 
 class Me extends StatelessWidget {
   const Me({super.key});
-
+  final login = false;
   // void changePage(BuildContext ctx) {
   //   Navigator.of(ctx).pushNamed('/History');
   // }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return login ? buildMeScene() : SignInPage();
+  }
+}
+
+Widget buildMeScene() => Scaffold(
       body: SafeArea(
           child: Container(
         // width: double.infinity,
@@ -27,11 +31,9 @@ class Me extends StatelessWidget {
         ]),
       )),
     );
-  }
 
-  Widget buildSettings() =>
-      IconButton(onPressed: (() {}), icon: Icon(Icons.settings));
-}
+Widget buildSettings() =>
+    IconButton(onPressed: (() {}), icon: Icon(Icons.settings));
 
 Widget buildProfile() => Container(
       decoration: BoxDecoration(border: Border.all(color: Colors.black)),
