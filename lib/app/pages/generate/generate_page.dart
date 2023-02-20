@@ -103,120 +103,122 @@ class _GeneratePageState extends State<GeneratePage> {
         onPressed: openFilterDialog,
         child: const Text("+")));
 
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Container(
-        color: const Color(dividerColor),
-        padding: const EdgeInsets.all(24),
-        child: Row(children: [
-          const Text("some icon"),
-          const SizedBox(
-            width: 24,
-          ),
-          Flexible(
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: "Your starting point",
-                      fillColor: Colors.white,
-                      filled: true),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: "Your destination",
-                      fillColor: Colors.white,
-                      filled: true),
-                )
-              ],
-            ),
-          )
-        ]),
-      ),
-      Padding(
+    return SafeArea(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Container(
+          color: const Color(dividerColor),
           padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text("Maximum distance between two places"),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
+          child: Row(children: [
+            const Text("some icon"),
+            const SizedBox(
+              width: 24,
+            ),
+            Flexible(
+              child: Column(
                 children: [
-                  SizedBox(
-                    width: 96,
-                    child: TextFormField(
-                      textAlign: TextAlign.center,
-                      controller: _maxDistTextFieldController,
-                      decoration: InputDecoration(
-                          suffixText: "km",
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8))),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        LimitRangeTextInputFormatter(1, 10)
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          _maxDistSliderValue = int.parse(value);
-                        });
-                      },
-                    ),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: "Your starting point",
+                        fillColor: Colors.white,
+                        filled: true),
                   ),
-                  Expanded(
-                    child: Slider(
-                      max: 10,
-                      divisions: 10,
-                      value: _maxDistSliderValue.toDouble(),
-                      label: _maxDistSliderValue.round().toString(),
-                      onChanged: ((value) {
-                        setState(() {
-                          _maxDistSliderValue = value.toInt();
-                          _maxDistTextFieldController.text =
-                              _maxDistSliderValue.toString();
-                        });
-                      }),
-                    ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: "Your destination",
+                        fillColor: Colors.white,
+                        filled: true),
                   )
                 ],
               ),
-              const SizedBox(
-                height: 24,
-              ),
-              const Text("Location types"),
-              const SizedBox(
-                height: 16,
-              ),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: tags,
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              Center(
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 32, vertical: 16),
-                        shape: const StadiumBorder()),
-                    onPressed: () {
-                      print(_maxDistSliderValue);
-                      print(selectedTagList);
-                    },
-                    child: const Text("Generate")),
-              )
-            ],
-          )),
-    ]);
+            )
+          ]),
+        ),
+        Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("Maximum distance between two places"),
+                const SizedBox(
+                  height: 16,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 96,
+                      child: TextFormField(
+                        textAlign: TextAlign.center,
+                        controller: _maxDistTextFieldController,
+                        decoration: InputDecoration(
+                            suffixText: "km",
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8))),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LimitRangeTextInputFormatter(1, 10)
+                        ],
+                        onChanged: (value) {
+                          setState(() {
+                            _maxDistSliderValue = int.parse(value);
+                          });
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: Slider(
+                        max: 10,
+                        divisions: 10,
+                        value: _maxDistSliderValue.toDouble(),
+                        label: _maxDistSliderValue.round().toString(),
+                        onChanged: ((value) {
+                          setState(() {
+                            _maxDistSliderValue = value.toInt();
+                            _maxDistTextFieldController.text =
+                                _maxDistSliderValue.toString();
+                          });
+                        }),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                const Text("Location types"),
+                const SizedBox(
+                  height: 16,
+                ),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: tags,
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                Center(
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 32, vertical: 16),
+                          shape: const StadiumBorder()),
+                      onPressed: () {
+                        print(_maxDistSliderValue);
+                        print(selectedTagList);
+                      },
+                      child: const Text("Generate")),
+                )
+              ],
+            )),
+      ]),
+    );
   }
 }
