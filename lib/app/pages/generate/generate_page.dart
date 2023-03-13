@@ -1,6 +1,7 @@
 import 'package:filter_list/filter_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:trek_bkk_app/app/pages/generate/generate_map.dart';
 import 'package:trek_bkk_app/constants.dart';
 import 'package:trek_bkk_app/domain/usecases/get_generated_route.dart';
 import 'package:trek_bkk_app/utils.dart';
@@ -201,6 +202,11 @@ class _GeneratePageState extends State<GeneratePage> {
                           ScaffoldMessenger.of(context).showSnackBar(
                               warningSnackbar("No more than 3 location types"));
                         } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) =>
+                                      const MapGeneratedPage())));
                           // generateRoute(
                           //     lat: "0",
                           //     long: "0",
